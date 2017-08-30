@@ -5,6 +5,7 @@
 // - 11/05/2012 - improved implementation of css file inclusion (by https://github.com/permanenttourist)
 // - 19/06/2009 - some new implementations, added Opera support
 // - 11/05/2009 - first sketch
+// - 30/08/2017 - add option printOnLandscape
 //
 // Printing plug-in for jQuery, evolution of jPrintArea: http://plugins.jquery.com/project/jPrintArea
 // requires jQuery 1.3.x
@@ -15,7 +16,8 @@ jQuery.fn.jqprint = function (options) {
     var opt = $.extend({}, {
         debug: false, // show the iframe for debugging
         importCSS: true, // import page CSS
-        printContainer: true // grab outer container as well as the contents of the selector
+        printContainer: true, // grab outer container as well as the contents of the selector
+        prinOnLandscape: false // print in landscape mode
     }, options);
 
     var $element = (this instanceof jQuery) ? this : $(this);
@@ -54,6 +56,10 @@ jQuery.fn.jqprint = function (options) {
                 doc.write("<link type='text/css' rel='stylesheet' href='" + href + "' media='" + media + "' />");
             }
         });
+    }
+
+    if (opt.prinOnLandscape) {
+        doc.write('<style type="text/css" media="print">@page { size: landscape; }</style>');
     }
 
     if (opt.printContainer) {
