@@ -17,7 +17,7 @@ jQuery.fn.jqprint = function (options) {
         debug: false, // show the iframe for debugging
         importCSS: true, // import page CSS
         printContainer: true, // grab outer container as well as the contents of the selector
-        prinInLandscape: false // print in landscape mode
+        printInLandscape: false // print in landscape mode
     }, options);
 
     var $element = (this instanceof jQuery) ? this : $(this);
@@ -58,7 +58,7 @@ jQuery.fn.jqprint = function (options) {
         });
     }
 
-    if (opt.prinInLandscape) {
+    if (opt.printInLandscape) {
         doc.write('<style type="text/css" media="print">@page { size: landscape; }</style>');
     }
 
